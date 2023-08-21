@@ -10,10 +10,10 @@ const routes: Routes = [
   {
     path: 'feeds/:type',
     component: FeedsComponent,
-    data: {
-      title: "About Page - Know our team",
-      description: `Welcome to the feed page of the application`
-    }
+    // data: {
+    //   title: "About Page - Know our team",
+    //   description: `Welcome to the feed page of the application`
+    // }
   }
 ];
 

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { BrowserModule, Meta, provideClientHydration } from '@angular/platform-browser';
 
+import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -15,7 +15,7 @@ import { RouterModule } from '@angular/router';
     AppRoutingModule,
     RouterModule
   ],
-  providers: [ provideClientHydration() ],
+  providers: [ provideClientHydration(), Meta ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
