@@ -53,8 +53,8 @@ export class AppComponent {
       // );
 
     this.router.events.subscribe(value => {
-      console.log('current route: ', this.router.url.toString());
-      this.metaService.updateMeta(this.router.url.toString());
+      // console.log('current route: ', this.router.url.toString());
+      // this.metaService.updateMeta(this.router.url.toString());
     });
   }
 

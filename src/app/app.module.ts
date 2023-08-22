@@ -4,6 +4,7 @@ import { BrowserModule, Meta, provideClientHydration } from '@angular/platform-b
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule
   ],
   providers: [ provideClientHydration(), Meta ],
   bootstrap: [AppComponent]

@@ -14,6 +14,10 @@ const routes: Routes = [
     //   title: "About Page - Know our team",
     //   description: `Welcome to the feed page of the application`
     // }
+  },
+  {
+    path: '**',
+    redirectTo: '/',
   }
 ];
 

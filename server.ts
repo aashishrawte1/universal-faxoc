@@ -7,6 +7,21 @@ import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { AppServerModule } from './src/main.server';
 
+export const META_INFO : { [key: string]: any } = {
+  "/feeds/trending": {
+    title: "Trending Page",
+    description: "Welcome to the trending section of the application"
+  },
+  "/feeds/subscriptions": {
+    title: "Subscription - Find the latest and hottest vid",
+    description: "Welcome to the subscriptions section of the application"
+  },
+  "/feeds/all": {
+    title: "All - Explore more",
+    description: "Welcome to the all section of the application"
+  }
+};
+
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
   const server = express();
@@ -15,7 +30,7 @@ export function app(): express.Express {
 
   // Our Universal express-engine (found @ https://github.com/angular/universal/tree/main/modules/express-engine)
   server.engine('html', ngExpressEngine({
-    bootstrap: AppServerModule
+    bootstrap: AppServerModule,
   }));
 
   server.set('view engine', 'html');
@@ -30,7 +45,19 @@ export function app(): express.Express {
 
   // All regular routes use the Universal engine
   server.get('*', (req, res) => {
-    res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
+    console.log((req.url))
+    res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] }, ( err, html) => {
+      if(html) {
+        // console.log('html:', html);
+        if(Object.prototype.hasOwnProperty.call(META_INFO, req.url)){
+          const {title, description} = META_INFO[req.url];
+          html = html.replace(/\$TITLE/g, title);
+          html = html.replace(/\$DESCRIPTION/g, description);
+        }
+        console.log('html:', html);
+        res.send(html);
+      }
+    });
   });
 
   // TODO: implement data requests securely
